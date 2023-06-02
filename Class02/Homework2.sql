@@ -23,9 +23,12 @@ ORDER BY s.FirstName
 
 
 -- List all Teacher Last Names and Student Last Names in single result set. Remove duplicates
-SELECT DISTINCT t.LastName AS 'Teacher Last Name', s.LastName AS 'Student Last Name'
-FROM Teacher t
-JOIN Student s ON t.Id = s.Id;
+SELECT DISTINCT LastName
+FROM(
+	SELECT LastName FROM Teacher
+	UNION
+	SELECT LastName FROM Student
+) AS Names 
 
 -- Create Foreign key constraints from diagram or with script
 ALTER TABLE Grade
